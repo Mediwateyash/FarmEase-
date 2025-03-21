@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Farmhouses</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Available Farmhouses</h1>
+    <% farmhouses.forEach(farmhouse => { %>
+      <div class="card">
+        <h2><%= farmhouse.name %></h2>
+        <img src="<%= farmhouse.images[0] %>" alt="<%= farmhouse.name %>">
+        <p><strong>Location:</strong> <%= farmhouse.location %></p>
+        <p><strong>Address:</strong> <%= farmhouse.address %></p>
+        <p><strong>Price:</strong> ₹<%= farmhouse.price %>/night</p>
+        <p><%= farmhouse.description %></p>
+        <div class="features">
+          <% farmhouse.features.forEach(feature => { %>
+            <span><%= feature %></span>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>
