@@ -7,9 +7,14 @@ const reviewSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now }, // Date of the review
 });
 
+const featureSchema = new mongoose.Schema({
+  heading: { type: String, required: true }, // Feature heading (e.g., "AC & Non-AC Rooms")
+  subheading: { type: String, required: true }, // Feature subheading (e.g., "Comfortable and spacious rooms...")
+});
+
 const farmhouseSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  features: { type: [String], required: true },
+  features: [featureSchema], // Array of feature objects
   images: { type: [String], required: true },
   address: { type: String, required: true },
   location: { type: String, required: true },

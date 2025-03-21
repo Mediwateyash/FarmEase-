@@ -5,90 +5,179 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= farmhouse.name %> - Farmhouse Details</title>
   <link rel="stylesheet" href="/css/farmhouse.css">
+  <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
-    <%- include('partials/header') %> <!-- Include the header partial -->
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="carousel">
-      <div class="carousel-inner">
-        <% farmhouse.images.forEach((image, index) => { %>
-          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-            <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>">
-          </div>
-        <% }) %>
-      </div>
-      <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
-      <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
-    </div>
-    <div class="hero-content">
-      <h1>Welcome to <%= farmhouse.name %></h1>
-      <p><%= farmhouse.description %></p>
-      <div class="cta-buttons">
-        <a href="#booking" class="btn">Book Now</a>
-        <a href="#features" class="btn btn-outline">Explore Features</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Key Features Section -->
-  <section id="features" class="features">
-    <h2>Key Features</h2>
-    <div class="feature-grid">
-      <% farmhouse.features.forEach(feature => { %>
-        <div class="feature-item">
-          <h3><%= feature %></h3>
-        </div>
-      <% }) %>
-    </div>
-  </section>
-
-  <!-- Capacity and Rating Section -->
-  <section class="details">
-    <div class="detail-item">
-      <h3>Capacity</h3>
-      <p><%= farmhouse.capacity %> guests</p>
-    </div>
-    <div class="detail-item">
-      <h3>Rating</h3>
-      <p><%= farmhouse.rating %>/5</p>
-    </div>
-  </section>
-
-  <!-- Reviews Section -->
-  <section id="reviews" class="reviews">
-    <h2>Reviews</h2>
-    <% if (farmhouse.reviews.length > 0) { %>
-      <div class="review-grid">
-        <% farmhouse.reviews.forEach(review => { %>
-          <div class="review-item">
-            <h3><%= review.user %></h3>
-            <p><strong>Rating:</strong> <%= review.rating %>/5</p>
-            <p><%= review.comment %></p>
-            <p><em><%= new Date(review.date).toLocaleDateString() %></em></p>
-          </div>
-        <% }) %>
-      </div>
-    <% } else { %>
-      <p>No reviews yet. Be the first to leave a review!</p>
-    <% } %>
-  </section>
-
-  <!-- Photo Gallery Section -->
-  <section id="gallery" class="gallery">
-    <h2>Photo Gallery</h2>
-    <div class="gallery-grid">
+  <%- include('partials/header') %> <!-- Include the header partial -->
+```html
+<!-- Hero Section -->
+<section class="hero">
+  <div class="carousel">
+    <div class="carousel-inner">
       <% farmhouse.images.forEach((image, index) => { %>
-        <div class="gallery-item">
-          <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>">
+        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+          <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>" loading="lazy">
         </div>
       <% }) %>
     </div>
-  </section>
+    <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+  </div>
+  <div class="hero-content">
+    <h1>Welcome to <%= farmhouse.name %></h1>
+    <p><%= farmhouse.description %></p>
+    <div class="cta-buttons">
+      <a href="#booking" class="btn">Book Now</a>
+      <a href="#features" class="btn btn-outline">Explore Features</a>
+    </div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <%- include('partials/footer') %>
+<!-- Key Features Section -->
+<section id="features" class="features">
+  <h2>Key Features</h2>
+  <ul class="feature-list">
+    <% farmhouse.features.slice(0, 6).forEach(feature => { %>
+      <li class="feature-item">
+        <h3><%= feature.heading %></h3>
+        <p><%= feature.subheading %></p>
+      </li>
+    <% }) %>
+  </ul>
+</section>
 
-  <script src="/js/script.js"></script></body>
+<!-- Details Section -->
+<section class="details">
+  <div class="detail-item">
+    <h3>Address</h3>
+    <p><%= farmhouse.address %></p>
+  </div>
+  <div class="detail-item">
+    <h3>Price</h3>
+    <p>₹<%= farmhouse.price %>/night</p>
+  </div>
+  <div class="detail-item">
+    <h3>Capacity</h3>
+    <p><%= farmhouse.capacity %> guests</p>
+  </div>
+  <div class="detail-item">
+    <h3>Rating</h3>
+    <p><%= farmhouse.rating %>/5</p>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section id="reviews" class="reviews">
+  <h2>Reviews</h2>
+  <% if (farmhouse.reviews.length > 0) { %>
+    <div class="review-grid">
+      <% farmhouse.reviews.forEach(review => { %>
+        <div class="review-item">
+          <h3><%= review.user %></h3>
+          <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+          <p><%= review.comment %></p>
+          <p><em><%= new Date(review.date).toLocaleDateString() %></em></p>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p>No reviews yet. Be the first to leave a review!</p>
+  <% } %>
+</section>
+
+<!-- Photo Gallery Section -->
+<section id="gallery" class="gallery">
+  <h2>Photo Gallery</h2>
+  <div class="gallery-grid">
+    <% farmhouse.images.forEach((image, index) => { %>
+      <div class="gallery-item">
+        <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>" loading="lazy">
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<!-- Book Now Modal -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Book <%= farmhouse.name %></h2>
+    <form id="bookingForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="guests">Number of Guests:</label>
+      <input type="number" id="guests" name="guests" required>
+
+      <label for="date">Check-in Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="message">Additional Message:</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<%- include('partials/footer') %>
+
+<!-- Script for Modal and Form Handling -->
+<script>
+  // Get the modal and buttons
+  const modal = document.getElementById("bookingModal");
+  const bookNowBtn = document.querySelector(".cta-buttons .btn[href='#booking']");
+  const closeBtn = document.getElementsByClassName("close")[0];
+
+  // Open modal when "Book Now" is clicked
+  bookNowBtn.onclick = function (e) {
+    e.preventDefault(); // Prevent default link behavior
+    modal.style.display = "block"; // Show the modal
+  };
+
+  // Close modal when the close button is clicked
+  closeBtn.onclick = function () {
+    modal.style.display = "none"; // Hide the modal
+  };
+
+  // Close modal when clicking outside the modal
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none"; // Hide the modal
+    }
+  };
+
+  // Handle form submission
+  document.getElementById("bookingForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent form submission
+
+    // Get form data
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const guests = document.getElementById("guests").value;
+    const date = document.getElementById("date").value;
+    const message = document.getElementById("message").value;
+
+    // Construct WhatsApp message
+    const whatsappMessage = `Hello, I would like to book <%= farmhouse.name %>.\n\n` +
+      `*Name:* ${name}\n` +
+      `*Phone:* ${phone}\n` +
+      `*Guests:* ${guests}\n` +
+      `*Check-in Date:* ${date}\n` +
+      `*Message:* ${message}`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
+    // Redirect to WhatsApp
+    window.location.href = `https://wa.me/+918799903365?text=${encodedMessage}`;
+  });
+</script>
+<script src="/js/script.js"></script>
+</body>
+
 </html>

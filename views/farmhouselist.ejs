@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Available Farmhouses</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
     <%- include('partials/header') %> <!-- Include the header partial -->
@@ -20,15 +21,17 @@
             <p><strong>Price:</strong> ₹<%= farmhouse.price %>/night</p>
             <p><%= farmhouse.description %></p>
             <div class="features">
-              <% farmhouse.features.forEach(feature => { %>
-                <span><%= feature %></span>
-              <% }) %>
-            </div>
+                <% farmhouse.features.forEach(feature => { %>
+                  <span class="feature-heading"><%= feature.heading %></span>
+                <% }) %>
+              </div>
             <a href="/farmhouse/<%= farmhouse._id %>" class="btn">View Details</a>
           </div>
         </div>
       <% }) %>
     </div>
   </div>
+  <!-- Footer -->
+  <%- include('partials/footer') %>
 </body>
 </html>

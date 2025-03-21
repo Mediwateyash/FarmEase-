@@ -4,12 +4,133 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Farmhouse Booking</title>
-  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/modal.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to Farmhouse Booking</h1>
-    <a href="/farmhouselist">View Available Farmhouses</a>
-  </div>
+  <%- include('partials/header') %>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="carousel">
+      <div class="carousel-inner" id="hero-carousel">
+        <!-- Carousel items will be dynamically populated here -->
+      </div>
+      <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+      <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to Farmescape</h1>
+      <p>Your perfect getaway for a serene and luxurious farmhouse experience.</p>
+      <a href="/farmhouselist" class="btn">Explore Farmhouses</a>
+    </div>
+  </section>
+
+  <!-- Farmescape Introduction Section -->
+  <section class="intro">
+    <div class="container">
+      <h2>About Farmescape</h2>
+      <p>
+        Farmescape is a platform dedicated to providing you with the best farmhouse experiences. Whether you're looking for a peaceful retreat in Alibaug, a nature-filled stay in Karjat, or a luxurious getaway in Badkour, we have the perfect farmhouse for you.
+      </p>
+    </div>
+  </section>
+
+
+ <!-- Farmhouse Locations Section -->
+<section class="locations">
+    <div class="container">
+      <h2>Popular Farmhouse Locations</h2>
+      <div class="location-cards">
+        <div class="location-card" data-location="alibaug">
+          <img src="https://pix8.agoda.net/hotelImages/66274528/0/2718e11a627be71894a51f52d93280c4.jpg?ce=0&s=1024x" alt="Alibaug">
+          <h3>Alibaug</h3>
+          <p>Beautiful beachside farmhouses.</p>
+          <button class="btn view-farmhouses" data-location="alibaug">View Farmhouses</button>
+        </div>
+        <div class="location-card" data-location="karjat">
+          <img src="https://pix8.agoda.net/hotelImages/39558402/0/c0886827101bed544a2dc3144e1adb5f.jpg?ce=0&s=1024x" alt="Karjat">
+          <h3>Karjat</h3>
+          <p>Serene farmhouses amidst nature.</p>
+          <button class="btn view-farmhouses" data-location="karjat">View Farmhouses</button>
+        </div>
+        <div class="location-card" data-location="badkour">
+          <img src="https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/575835466.jpg?k=d307c31a484659d0f94a4e116fe75b8853e8253a84b1413ac6729ae187190bff&o=&s=1024x" alt="Badlapur">
+          <h3>Badlapur</h3>
+          <p>Luxurious farmhouses with modern amenities.</p>
+          <button class="btn view-farmhouses" data-location="badkour">View Farmhouses</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Dynamic Farmhouse List -->
+  <section class="farmhouse-list">
+    <div class="container">
+      <h2 id="farmhouse-list-title">All Farmhouses</h2>
+      <div class="farmhouse-grid" id="farmhouse-grid">
+        <!-- Farmhouses will be dynamically populated here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+  <script>
+    // Sample carousel images (replace with your images)
+    const carouselImages = [
+      "https://media-cdn.tripadvisor.com/media/photo-s/04/b9/61/28/hotel-mar-de-luz.jpg",
+      "https://igx.4sqi.net/img/general/600x600/XKLSBGASI3CV5NX0XL23EBFMQ15DKMPFBFCLZ3JUT45EPWTZ.jpg",
+      "/public/images/hero3.jpg"
+    ];
+
+    // Function to initialize the hero carousel
+    function initializeHeroCarousel() {
+      const heroCarousel = document.getElementById('hero-carousel');
+      heroCarousel.innerHTML = ''; // Clear the carousel
+
+      carouselImages.forEach(image => {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        carouselItem.style.backgroundImage = `url(${image})`;
+        heroCarousel.appendChild(carouselItem);
+      });
+
+      // Initialize carousel functionality
+      let currentIndex = 0;
+      const items = document.querySelectorAll('.carousel-item');
+      const totalItems = items.length;
+
+      function showSlide(index) {
+        items.forEach((item, i) => {
+          item.style.display = i === index ? 'block' : 'none';
+        });
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        showSlide(currentIndex);
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        showSlide(currentIndex);
+      }
+
+      // Show the first slide initially
+      showSlide(currentIndex);
+
+      // Attach event listeners to carousel controls
+      document.querySelector('.carousel-control.prev').addEventListener('click', prevSlide);
+      document.querySelector('.carousel-control.next').addEventListener('click', nextSlide);
+    }
+
+    // Initialize the hero carousel on page load
+    window.addEventListener('load', initializeHeroCarousel);
+  </script>
 </body>
 </html>

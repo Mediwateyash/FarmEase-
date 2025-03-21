@@ -1,16 +1,17 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
   }
   
-  a {
-    text-decoration: none;
-    color: inherit;
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
   }
   
   /* Header */
@@ -34,7 +35,6 @@ body {
     margin: 0;
     font-size: 1.8rem;
     font-weight: bold;
-    color: white;
   }
   
   .nav-links .btn {
@@ -149,9 +149,8 @@ body {
     background-color: #3498db;
     color: #fff;
   }
-  
-  /* Key Features Section */
-  .features {
+  /* Key Features Section - Simple List */
+.features {
     padding: 40px 20px;
     background-color: #fff;
   }
@@ -160,120 +159,87 @@ body {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #2c3e50;
   }
-  
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-  }
+/* Key Features Section - Two Columns */
+.feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between columns */
+    justify-content: space-between; /* Distribute columns evenly */
+}
+
+.feature-list li {
+    flex: 1 1 calc(50% - 20px); /* Two columns with gap */
+    box-sizing: border-box;
+}
   
   .feature-item {
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #3498db; /* Blue accent border */
+    border-radius: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .feature-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
   .feature-item h3 {
-    margin: 0;
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: #3498db; /* Blue heading */
+    margin: 0 0 10px;
   }
   
   .feature-item p {
-    margin: 10px 0;
+    font-size: 1rem;
     color: #555;
+    margin: 0;
+    line-height: 1.5;
   }
   
-  /* Details Section */
+  /* Details Section - Cards */
   .details {
     display: flex;
-    justify-content: space-around;
-    padding: 40px 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
     background-color: #ecf0f1;
   }
   
   .detail-item {
-    text-align: center;
+    flex: 1;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
   }
   
   .detail-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   }
   
   .detail-item h3 {
-    margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #2c3e50;
+    margin: 0 0 10px;
+    background-color: #e67e22; /* Orange background for headings */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
   }
   
   .detail-item p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #555;
-  }
-  /* Carousel Styles */
-.carousel {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    display: none; /* Hide all slides by default */
-  }
-  
-  .carousel-item.active {
-    display: block; /* Show the active slide */
-  }
-  
-  .carousel-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .carousel-control:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .carousel-control.prev {
-    left: 10px;
-  }
-  
-  .carousel-control.next {
-    right: 10px;
+    margin: 0;
+    line-height: 1.5;
   }
   /* Reviews Section */
   .reviews {
@@ -285,6 +251,7 @@ body {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #2c3e50;
   }
   
   .review-grid {
@@ -321,40 +288,17 @@ body {
     color: #888;
   }
   
- /* Footer Styles */
-footer {
-    background-color: #2c3e50;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  footer a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  footer a:hover {
-    color: #2980b9;
-  }
-  /* Gallery Section */
-.gallery {
+  /* Photo Gallery Section */
+  .gallery {
     padding: 40px 20px;
-    background-color: #fff;
+    background-color: #f4f4f4;
   }
   
   .gallery h2 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #2c3e50;
   }
   
   .gallery-grid {
@@ -380,4 +324,22 @@ footer {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  footer a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  footer a:hover {
+    color: #2980b9;
   }
