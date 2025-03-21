@@ -9,7 +9,6 @@
 </head>
 <body>
   <%- include('partials/header') %> <!-- Include the header partial -->
-```html
 <!-- Hero Section -->
 <section class="hero">
   <div class="carousel">
@@ -128,54 +127,7 @@
 
 <!-- Script for Modal and Form Handling -->
 <script>
-  // Get the modal and buttons
-  const modal = document.getElementById("bookingModal");
-  const bookNowBtn = document.querySelector(".cta-buttons .btn[href='#booking']");
-  const closeBtn = document.getElementsByClassName("close")[0];
-
-  // Open modal when "Book Now" is clicked
-  bookNowBtn.onclick = function (e) {
-    e.preventDefault(); // Prevent default link behavior
-    modal.style.display = "block"; // Show the modal
-  };
-
-  // Close modal when the close button is clicked
-  closeBtn.onclick = function () {
-    modal.style.display = "none"; // Hide the modal
-  };
-
-  // Close modal when clicking outside the modal
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none"; // Hide the modal
-    }
-  };
-
-  // Handle form submission
-  document.getElementById("bookingForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent form submission
-
-    // Get form data
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const guests = document.getElementById("guests").value;
-    const date = document.getElementById("date").value;
-    const message = document.getElementById("message").value;
-
-    // Construct WhatsApp message
-    const whatsappMessage = `Hello, I would like to book <%= farmhouse.name %>.\n\n` +
-      `*Name:* ${name}\n` +
-      `*Phone:* ${phone}\n` +
-      `*Guests:* ${guests}\n` +
-      `*Check-in Date:* ${date}\n` +
-      `*Message:* ${message}`;
-
-    // Encode the message for URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-
-    // Redirect to WhatsApp
-    window.location.href = `https://wa.me/+918799903365?text=${encodedMessage}`;
-  });
+ 
 </script>
 <script src="/js/script.js"></script>
 </body>
