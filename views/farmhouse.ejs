@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= farmhouse.name %> - Farmhouse Details</title>
+  <link rel="stylesheet" href="/css/farmhouse.css">
+</head>
+<body>
+    <%- include('partials/header') %> <!-- Include the header partial -->
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="carousel">
+      <div class="carousel-inner">
+        <% farmhouse.images.forEach((image, index) => { %>
+          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+            <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>">
+          </div>
+        <% }) %>
+      </div>
+      <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+      <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to <%= farmhouse.name %></h1>
+      <p><%= farmhouse.description %></p>
+      <div class="cta-buttons">
+        <a href="#booking" class="btn">Book Now</a>
+        <a href="#features" class="btn btn-outline">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section id="features" class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <% farmhouse.features.forEach(feature => { %>
+        <div class="feature-item">
+          <h3><%= feature %></h3>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Capacity and Rating Section -->
+  <section class="details">
+    <div class="detail-item">
+      <h3>Capacity</h3>
+      <p><%= farmhouse.capacity %> guests</p>
+    </div>
+    <div class="detail-item">
+      <h3>Rating</h3>
+      <p><%= farmhouse.rating %>/5</p>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews" class="reviews">
+    <h2>Reviews</h2>
+    <% if (farmhouse.reviews.length > 0) { %>
+      <div class="review-grid">
+        <% farmhouse.reviews.forEach(review => { %>
+          <div class="review-item">
+            <h3><%= review.user %></h3>
+            <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+            <p><%= review.comment %></p>
+            <p><em><%= new Date(review.date).toLocaleDateString() %></em></p>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p>No reviews yet. Be the first to leave a review!</p>
+    <% } %>
+  </section>
+
+  <!-- Photo Gallery Section -->
+  <section id="gallery" class="gallery">
+    <h2>Photo Gallery</h2>
+    <div class="gallery-grid">
+      <% farmhouse.images.forEach((image, index) => { %>
+        <div class="gallery-item">
+          <img src="<%= image %>" alt="Farmhouse Image <%= index + 1 %>">
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+  <script src="/js/script.js"></script></body>
+</html>
