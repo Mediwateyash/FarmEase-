@@ -101,5 +101,5 @@ if (carousel) {
     const encodedMessage = encodeURIComponent(whatsappMessage);
 
     // Redirect to WhatsApp
-    window.location.href = `https://wa.me/+918799903365?text=${encodedMessage}`;
+    window.location.href = `https://wa.me/+918108705300?text=${encodedMessage}`;
   });
